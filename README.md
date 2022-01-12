@@ -30,8 +30,8 @@ You can reproduce the results by the following command.
 ```
 python inference.py  \
 --test_lr_folder testing_lr_images/ \
---output_folder results_16epoch \
---checkpoint checkpoint_x3/epoch_16.pth \
+--output_folder results_30epoch \
+--checkpoint checkpoint_x3/epoch_30.pth \
 --upscale_factor 3
 ```
 
