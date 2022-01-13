@@ -1,4 +1,5 @@
-import argparse, os
+import argparse
+import os
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -9,7 +10,6 @@ import utils
 import skimage.color as sc
 import random
 from collections import OrderedDict
-# os.environ["CUDA_VISIBLE_DEVICES"] = '0'
 
 # Training settings
 parser = argparse.ArgumentParser(description="IMDN")
@@ -73,11 +73,21 @@ print("===> Loading datasets")
 
 trainset = custom.custom(args)
 testset = Set5_val.DatasetFromFolderVal("Test_Datasets/VRDL/",
-                                       "Test_Datasets/VRDL_LR",
-                                       args.scale)
-training_data_loader = DataLoader(dataset=trainset, num_workers=args.threads, batch_size=args.batch_size, shuffle=True, pin_memory=True, drop_last=True)
-testing_data_loader = DataLoader(dataset=testset, num_workers=args.threads, batch_size=args.testBatchSize,
-                                 shuffle=False)
+                                        "Test_Datasets/VRDL_LR",
+                                        args.scale)
+training_data_loader = DataLoader(
+    dataset=trainset,
+    num_workers=args.threads,
+    batch_size=args.batch_size,
+    shuffle=True, pin_memory=True,
+    drop_last=True
+)
+testing_data_loader = DataLoader(
+    dataset=testset,
+    num_workers=args.threads,
+    batch_size=args.testBatchSize,
+    shuffle=False
+)
 
 print("===> Building models")
 args.is_train = True
@@ -176,6 +186,7 @@ def save_checkpoint(epoch):
         os.makedirs(model_folder)
     torch.save(model.state_dict(), model_out_path)
     print("===> Checkpoint saved to {}".format(model_out_path))
+
 
 def print_network(net):
     num_params = 0
